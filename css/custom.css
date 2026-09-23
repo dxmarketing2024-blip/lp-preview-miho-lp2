@@ -1,0 +1,491 @@
+@charset "UTF-8";
+/* ------------------------------------------------------------------
+   custom.css — 260912_みほYT原稿 D列への差し替え用スタイル
+   既存 style.min.css のデザイントークンに合わせて新パーツだけ追加する。
+   ・--u : 375px基準の設計値をそのまま書くための単位
+           （PC=1px / SP=100vw/375 で既存の calc(100vw*(N/375)) と等価）
+   ------------------------------------------------------------------ */
+
+.main__container { --u: 1px; }
+@media (max-width: 767px) {
+  .main__container { --u: calc(100vw / 375); }
+}
+
+:root {
+  --grad: linear-gradient(to right, #f380a2, #fcc259);
+  --cream: #fffeed;
+}
+
+/* 共通：波線つき見出し（既存 .xxx__heading:after と同じ形） */
+.c-head {
+  position: relative; display: block;
+  font-size: calc(20 * var(--u));
+  font-weight: 700; text-align: center; line-height: 1.5;
+}
+.c-head .accent { color: var(--pink); }
+.c-head--white { color: #fff; }
+.c-head--pink { color: var(--pink); }
+
+/* ===== 1. FV =====================================================
+   支給画像 fv_main.webp（941x1672）1枚で完結。文言はすべて画像に焼き込み済みで、
+   同等のテキストは img の alt に持たせている（現行LPの fv.webp と同じ作り）。 */
+.fvx {
+  position: relative; display: block; width: 100%;
+  background: #fff;
+}
+.fvx__main { display: block; width: 100%; }
+.fvx__main img {
+  display: block; width: 100%; height: auto;
+  max-block-size: none; max-height: none;
+}
+
+/* ===== 2. FV直下リード＋CTA ====================================== */
+.leadcta {
+  position: relative; display: block; width: 100%;
+  /* FV画像の下端はピンク帯で締まっている（画像側の白帯140pxは切除済み）。
+     ここの padding が FV とリード文の間隔そのものになる */
+  background: #fff; padding: calc(32 * var(--u)) 0 calc(40 * var(--u));
+}
+.leadcta__text {
+  display: block; width: calc(335 * var(--u)); margin: 0 auto;
+  font-size: calc(16 * var(--u)); font-weight: 700; line-height: 1.9;
+  text-align: center;
+}
+.leadcta__text .accent {
+  background: linear-gradient(transparent 62%, rgba(253, 249, 80, .75) 62%);
+}
+.leadcta .cta { margin-top: calc(20 * var(--u)); }
+.leadcta .cta__note { color: var(--black); }
+
+/* ===== 3. 共感・問題提起（.intro を流用、最後の1行だけ新規） =====
+   .intro の高さ916pxは intro_bg.webp（1125x2748）の実寸に合わせたもの。
+   新原稿は中身が短く下に約250pxの死に余白が出るため、背景の平坦なベージュ部分だけを
+   660px抜いた intro_bg_short.webp（1125x2088＝696px相当）に差し替えて高さも合わせる。
+   下端の▼（次セクションへの繋ぎ）は元のまま残している。 */
+.intro {
+  /* 固定高さをやめて中身に追従させる。背景は上がグラデ・中央が平坦・下が▼なので
+     縦に伸縮させても崩れない（background-size を 100% 100% にして高さへ追従）。
+     padding-bottom は▼の高さ分を確保して、箱が▼に乗らないようにする。 */
+  height: auto !important;
+  padding-bottom: calc(104 * var(--u)) !important;
+  background-image: url("../images/intro_bg_short.webp") !important;
+  background-size: 100% 100% !important;
+}
+/* 心の声なので、現行LPの「枠線つき吹き出し＋右上に人物の切り抜き」の作りに合わせる */
+.intro__closing {
+  position: relative; display: block;
+  width: calc(335 * var(--u));
+  margin: calc(58 * var(--u)) auto 0;   /* 写真が上へはみ出す分を空ける */
+  padding: calc(18 * var(--u)) calc(104 * var(--u)) calc(18 * var(--u)) calc(18 * var(--u));
+  background: #fffaf4;
+  border: calc(2 * var(--u)) solid var(--black);
+  border-radius: calc(16 * var(--u));
+}
+.intro__closing_text {
+  font-size: calc(16 * var(--u)); font-weight: 900; line-height: 1.8;
+  color: var(--pink); text-align: left; font-feature-settings: "palt";
+}
+/* 下向きのノッチ（外枠の三角＋内側の塗りの三角を重ねる） */
+.intro__closing:before,
+.intro__closing:after {
+  content: ""; position: absolute; left: calc(40 * var(--u));
+  width: 0; height: 0;
+}
+.intro__closing:before {
+  bottom: calc(-16 * var(--u));
+  border-left: calc(13 * var(--u)) solid transparent;
+  border-right: calc(13 * var(--u)) solid transparent;
+  border-top: calc(16 * var(--u)) solid var(--black);
+}
+.intro__closing:after {
+  bottom: calc(-12 * var(--u));
+  margin-left: calc(2.4 * var(--u));
+  border-left: calc(10.6 * var(--u)) solid transparent;
+  border-right: calc(10.6 * var(--u)) solid transparent;
+  border-top: calc(13 * var(--u)) solid #fffaf4;
+}
+/* 吹き出しの高さより背を高くして、上へはみ出させる（現行LPと同じ見え方） */
+.intro__closing_photo {
+  position: absolute; right: calc(-8 * var(--u)); bottom: 0;
+  width: calc(152 * var(--u)); height: auto;
+  /* reset.min.css の img{max-block-size:100%} が吹き出しの高さで頭打ちにするので解除 */
+  max-block-size: none; max-height: none;
+  filter: drop-shadow(0 calc(3 * var(--u)) calc(8 * var(--u)) rgba(88, 48, 36, .22));
+}
+
+/* ===== 4. 解決策（.concept を流用、箇条書きだけ新規） ===========
+   罫線背景は line-height:2.5em 依存なので行の高さは触らず、
+   字詰め（palt）だけで21文字を1行に収める（「…ありません。」の「ん。」が溢れていた） */
+.concept__text {
+  font-feature-settings: "palt";
+  letter-spacing: -.01em;
+}
+.concept__points {
+  display: block; width: calc(335 * var(--u));
+  margin: calc(24 * var(--u)) auto 0;
+  background: #fff; border-radius: calc(15 * var(--u));
+  padding: calc(6 * var(--u)) calc(17.5 * var(--u));
+  box-shadow: 0 0 calc(20 * var(--u)) rgba(250, 107, 110, .2);
+}
+.concept__points li {
+  position: relative; display: block;
+  padding: calc(13 * var(--u)) 0 calc(13 * var(--u)) calc(30 * var(--u));
+  font-size: calc(16 * var(--u)); font-weight: 700;
+  border-bottom: 1px dashed rgba(88, 48, 36, .35);
+}
+.concept__points li:last-child { border-bottom: none; }
+.concept__points li:before {
+  content: ""; position: absolute; top: 0; bottom: 0; left: calc(4 * var(--u));
+  margin: auto 0; display: block;
+  width: calc(16 * var(--u)); height: calc(16 * var(--u));
+  border-radius: calc(4 * var(--u)); background: var(--grad);
+}
+.concept__kicker {
+  display: block; width: calc(335 * var(--u));
+  margin: calc(24 * var(--u)) auto 0;
+  font-size: calc(16 * var(--u)); font-weight: 700; line-height: 1.9;
+  text-align: center;
+}
+.concept__kicker .accent_bg {
+  background: linear-gradient(transparent 62%, rgba(253, 249, 80, .75) 62%);
+}
+
+/* ===== 5. 発信者紹介：Before / After ============================= */
+.ba {
+  display: block; width: calc(300 * var(--u));
+  margin: calc(20 * var(--u)) auto 0;
+  border-radius: calc(14 * var(--u)); overflow: hidden;
+  border: calc(2 * var(--u)) solid #f1e3da;
+}
+.ba__row { display: block; padding: calc(12 * var(--u)) calc(14 * var(--u)); }
+.ba__row--before { background: #f6f1ee; }
+.ba__row--after { background: #fff4f2; }
+.ba__label {
+  display: inline-block; border-radius: 9999px;
+  padding: calc(2 * var(--u)) calc(10 * var(--u));
+  margin-bottom: calc(6 * var(--u));
+  font-size: calc(12 * var(--u)); font-weight: 700; color: #fff;
+}
+.ba__row--before .ba__label { background: #b3a29a; }
+.ba__row--after .ba__label { background: var(--pink); }
+.ba__body {
+  display: block; font-size: calc(14 * var(--u));
+  font-weight: 700; line-height: 1.7;
+}
+.ba__row--after .ba__body { color: var(--pink); }
+
+/* ===== 6. ストーリー：吹き出し＋クリーム地の本文カード ========== */
+.bubble {
+  position: relative; display: block;
+  width: calc(300 * var(--u)); margin: calc(24 * var(--u)) auto 0;
+  padding: calc(14 * var(--u)) calc(16 * var(--u));
+  border-radius: 9999px; background: var(--grad);
+  font-size: calc(15 * var(--u)); font-weight: 700; line-height: 1.5;
+  text-align: center; color: #fff; font-feature-settings: "palt";
+}
+.bubble:after {
+  content: ""; position: absolute; left: 0; right: 0; margin: 0 auto;
+  bottom: calc(-11 * var(--u)); width: 0; height: 0;
+  border-left: calc(11 * var(--u)) solid transparent;
+  border-right: calc(11 * var(--u)) solid transparent;
+  border-top: calc(12 * var(--u)) solid #f9a181;
+}
+.storycard {
+  position: relative; display: block;
+  width: calc(300 * var(--u)); margin: calc(22 * var(--u)) auto 0;
+  padding: calc(20 * var(--u)) calc(18 * var(--u));
+  background: var(--cream); border-radius: calc(14 * var(--u));
+  font-size: calc(15 * var(--u)); font-weight: 700; line-height: 1.9;
+}
+.storycard p + p { margin-top: calc(14 * var(--u)); }
+.storycard .accent { color: var(--pink); }
+.storycard .accent_bg {
+  display: block; width: max-content; max-width: 100%;
+  margin: calc(14 * var(--u)) 0;
+  padding: calc(4 * var(--u)) calc(8 * var(--u));
+  background: var(--pink); color: #fff;
+  font-size: calc(17 * var(--u)); font-weight: 700;
+  font-feature-settings: "palt";
+}
+/* 本文を回り込ませる（負マージンで重ねると文字が隠れるため float を使う） */
+.storycard { overflow: hidden; }
+.storycard__inset {
+  float: right; width: calc(112 * var(--u));
+  margin: calc(4 * var(--u)) calc(-4 * var(--u)) calc(4 * var(--u)) calc(10 * var(--u));
+  shape-outside: margin-box;
+}
+.storycard__inset img { display: block; width: 100%; height: auto; }
+
+/* ===== 7. 4つの理由カード ======================================= */
+.reason {
+  position: relative; display: block; width: 100%;
+  background: #fff; border-radius: calc(16 * var(--u)); overflow: hidden;
+}
+.reason__head {
+  display: flex; align-items: center; gap: calc(10 * var(--u));
+  padding: calc(16 * var(--u)) calc(16 * var(--u)) calc(12 * var(--u));
+}
+.reason__no {
+  flex: 0 0 auto;
+  width: calc(28 * var(--u)); height: calc(28 * var(--u));
+  border-radius: 50%; background: var(--grad); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: calc(15 * var(--u)); font-weight: 900;
+}
+.reason__title {
+  flex: 1 1 auto;
+  font-size: calc(17 * var(--u)); font-weight: 900; line-height: 1.4;
+  color: var(--pink); font-feature-settings: "palt";
+}
+.reason__photo { display: block; width: 100%; }
+.reason__photo img { display: block; width: 100%; height: auto; }
+.reason__body {
+  display: block; padding: calc(14 * var(--u)) calc(16 * var(--u)) calc(18 * var(--u));
+  font-size: calc(15 * var(--u)); font-weight: 500; line-height: 1.8;
+  color: var(--black);
+}
+
+/* ===== 8. 見出し吹き出し（この1冊で読めること / さらに…） ======= */
+.tipbubble {
+  position: relative; display: block;
+  width: calc(335 * var(--u)); margin: 0 auto;
+  padding: calc(18 * var(--u)) calc(16 * var(--u));
+  background: #fff; border-radius: calc(24 * var(--u));
+  filter: drop-shadow(0 0 calc(20 * var(--u)) rgba(250, 107, 110, .25));
+  text-align: center;
+}
+.tipbubble:after {
+  content: ""; position: absolute; left: 0; right: 0; margin: 0 auto;
+  bottom: calc(-13 * var(--u)); width: 0; height: 0;
+  border-left: calc(13 * var(--u)) solid transparent;
+  border-right: calc(13 * var(--u)) solid transparent;
+  border-top: calc(14 * var(--u)) solid #fff;
+}
+.tipbubble--amber { filter: drop-shadow(0 0 calc(20 * var(--u)) rgba(252, 194, 90, .35)); }
+.tipbubble__kicker {
+  display: block; font-size: calc(13 * var(--u)); font-weight: 700;
+  color: #fcae5a; margin-bottom: calc(6 * var(--u));
+  font-feature-settings: "palt";
+}
+.tipbubble__main {
+  display: block; font-size: calc(22 * var(--u)); font-weight: 900;
+  color: var(--pink); line-height: 1.4; font-feature-settings: "palt";
+}
+
+/* ===== 9. 目次（章カード） ====================================== */
+.chapter {
+  position: relative; display: block; width: 100%;
+  margin-top: calc(26 * var(--u)) !important;
+  padding: calc(3 * var(--u));
+  border-radius: calc(18 * var(--u));
+  background: var(--grad);
+  filter: drop-shadow(0 0 calc(12 * var(--u)) rgba(250, 107, 110, .2));
+}
+.chapter:first-child { margin-top: 0 !important; }
+.chapter__no {
+  /* カード白地に隠れないよう z-index を上げ、白文字が読める濃さのグラデにする */
+  position: absolute; z-index: 3;
+  top: calc(-15 * var(--u)); left: 0; right: 0;
+  margin: 0 auto; width: calc(62 * var(--u)); height: calc(30 * var(--u));
+  border-radius: 9999px; color: #fff;
+  background: linear-gradient(to right, #ef5f86, #f4913c);
+  box-shadow: 0 calc(2 * var(--u)) calc(6 * var(--u)) rgba(214, 90, 90, .28);
+  display: flex; align-items: center; justify-content: center;
+  font-size: calc(16 * var(--u)); font-weight: 900; letter-spacing: .06em;
+}
+.chapter__inner {
+  position: relative; z-index: 1;
+  display: block; background: #fff;
+  border-radius: calc(15 * var(--u));
+  padding: calc(26 * var(--u)) calc(18 * var(--u)) calc(20 * var(--u));
+}
+.chapter__title {
+  display: block; font-size: calc(17 * var(--u)); font-weight: 900;
+  line-height: 1.6; color: var(--pink); text-align: center;
+  font-feature-settings: "palt";
+}
+
+/* ===== 10. 追加コンテンツ（3つのやり方） ======================== */
+.howto { display: block; width: calc(335 * var(--u)); margin: calc(22 * var(--u)) auto 0; }
+.howto li {
+  display: block; background: #fff;
+  border-radius: calc(12 * var(--u));
+  padding: calc(14 * var(--u)) calc(16 * var(--u));
+  box-shadow: 0 0 calc(16 * var(--u)) rgba(252, 194, 90, .4);
+}
+.howto li + li { margin-top: calc(12 * var(--u)); }
+.howto__t {
+  display: block; font-size: calc(16 * var(--u)); font-weight: 900;
+  color: var(--pink); line-height: 1.5;
+}
+.howto__d {
+  display: block; margin-top: calc(4 * var(--u));
+  font-size: calc(14 * var(--u)); font-weight: 500; line-height: 1.7;
+}
+
+/* ===== 11. お客様の声カード ===================================== */
+.voicecard {
+  position: relative; display: block; width: 100%;
+  background: #fff; border-radius: calc(16 * var(--u));
+  overflow: hidden; padding-bottom: calc(18 * var(--u));
+}
+.voicecard__photo { position: relative; display: block; padding: calc(12 * var(--u)) calc(12 * var(--u)) 0; }
+.voicecard__photo img { display: block; width: 100%; height: auto; border-radius: calc(14 * var(--u)); }
+.voicecard__name {
+  position: relative; display: block; width: max-content; max-width: 90%;
+  margin: calc(-16 * var(--u)) 0 0;
+  padding: calc(7 * var(--u)) calc(18 * var(--u));
+  background: var(--pink); color: #fff;
+  border-radius: 0 9999px 9999px 0;
+  font-size: calc(15 * var(--u)); font-weight: 700;
+  font-feature-settings: "palt";
+}
+.voicecard__body {
+  display: block; padding: calc(16 * var(--u)) calc(16 * var(--u)) 0;
+  font-size: calc(14 * var(--u)); font-weight: 500; line-height: 1.9;
+  text-align: justify;
+}
+
+/* ===== 12. 未来（写真＋見出しオーバーレイ） ===================== */
+.futurex { position: relative; display: block; width: 100%; }
+.futurex img { display: block; width: 100%; height: auto; }
+.futurex__cap {
+  position: absolute; left: 0; right: 0; bottom: calc(16 * var(--u));
+  padding: 0 calc(16 * var(--u));
+  font-size: calc(21 * var(--u)); font-weight: 900; line-height: 1.45;
+  color: #fff; text-align: center; font-feature-settings: "palt";
+  text-shadow: 0 0 calc(10 * var(--u)) rgba(70, 120, 150, .95),
+               0 0 calc(20 * var(--u)) rgba(70, 120, 150, .8),
+               0 calc(2 * var(--u)) calc(4 * var(--u)) rgba(0, 0, 0, .35);
+}
+.future__items {
+  display: block; width: calc(335 * var(--u));
+  margin: calc(24 * var(--u)) auto 0;
+  background: #fff; border-radius: calc(15 * var(--u));
+  padding: calc(6 * var(--u)) calc(17.5 * var(--u));
+  box-shadow: 0 0 calc(20 * var(--u)) rgba(235, 225, 215, .8);
+}
+.future__items li {
+  position: relative; display: block;
+  padding: calc(13 * var(--u)) 0 calc(13 * var(--u)) calc(28 * var(--u));
+  font-size: calc(15 * var(--u)); font-weight: 700; line-height: 1.7;
+  border-bottom: 1px dashed rgba(88, 48, 36, .35);
+}
+.future__items li:last-child { border-bottom: none; }
+.future__items li:before {
+  content: ""; position: absolute; left: calc(2 * var(--u));
+  top: calc(20 * var(--u));
+  display: block; width: calc(14 * var(--u)); height: calc(14 * var(--u));
+  border-radius: 50%; background: var(--grad);
+}
+.future__closing {
+  display: block; width: calc(335 * var(--u));
+  margin: calc(24 * var(--u)) auto 0;
+  font-size: calc(18 * var(--u)); font-weight: 900;
+  text-align: center; color: var(--pink);
+}
+
+/* ===== 13. FAQ（既存アコーディオン構造を流用） ================== */
+.faq__list_head_title { font-feature-settings: "palt"; }
+
+/* ===== プロフィール見出し（「Profile　プロフィール」を1つのピルに） ===== */
+.profile__heading {
+  width: auto !important; max-width: calc(300 * var(--u));
+  padding: 0 calc(22 * var(--u));
+  font-size: calc(18 * var(--u)) !important;
+  gap: calc(8 * var(--u));
+}
+.profile__heading .en {
+  font-size: calc(15 * var(--u)); letter-spacing: .06em; opacity: .95;
+}
+
+/* ===== 14. 免責 ================================================= */
+.disclaimer {
+  position: relative; display: block; width: 100%;
+  background: #f4ece5; padding: calc(30 * var(--u)) 0;
+}
+.disclaimer__inner { display: block; width: calc(335 * var(--u)); margin: 0 auto; }
+.disclaimer__head {
+  display: block; font-size: calc(15 * var(--u)); font-weight: 700;
+  text-align: center; margin-bottom: calc(12 * var(--u));
+}
+.disclaimer__body {
+  display: block; font-size: calc(12 * var(--u)); font-weight: 500;
+  line-height: 1.9; color: #6f5a50;
+}
+
+/* ===== 4つの理由：リストの左寄せを中央に戻す =====================
+   style.min.css の .belief__lists は margin:30px auto 0 0（＝左0/右auto）で
+   このセクションだけ左に寄っていた。他セクションは 335px 中央なので揃える。 */
+.belief__lists { margin-left: auto !important; margin-right: auto !important; }
+
+/* ===== CTAの位置 =================================================
+   元の30pxは離れすぎ、4pxは詰めすぎだったので14pxに置く。
+   直前が line-height:2 の本文のときは最終行の下に約8pxの半分行送りが乗るため、
+   見た目の間隔はこれ＋8px程度になる。 */
+.story__cta_container,
+.benefit__cta_container,
+.cases__cta_container { margin-top: calc(18 * var(--u)) !important; }
+
+/* ===== CTAの見た目 ===============================================
+   平面的な緑のベタ塗りだったので、奥行き（上ハイライト＋下の締め色）と
+   接地感のある影、背後のハローを足して「押せるもの」に見せる。
+   文言・アイコン・パルスは既存のまま。 */
+.cta {
+  position: relative;
+  isolation: isolate;
+}
+.cta:before {
+  content: "";
+  position: absolute; z-index: -1;
+  left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 108%; height: 190%;
+  background: radial-gradient(closest-side,
+              rgba(6, 199, 85, .22) 0%,
+              rgba(6, 199, 85, .10) 55%,
+              rgba(6, 199, 85, 0) 100%);
+  pointer-events: none;
+}
+.cta__link {
+  background-color: #06c755;
+  background-image: linear-gradient(180deg,
+              rgba(255, 255, 255, .28) 0%,
+              rgba(255, 255, 255, 0) 42%,
+              rgba(0, 0, 0, .10) 100%);
+  box-shadow:
+      0 calc(6 * var(--u)) calc(16 * var(--u)) rgba(4, 150, 70, .32),
+      0 calc(2 * var(--u)) calc(4 * var(--u)) rgba(4, 150, 70, .22),
+      inset 0 calc(-3 * var(--u)) 0 rgba(0, 0, 0, .12);
+  letter-spacing: .01em;
+  text-shadow: 0 1px 1px rgba(0, 80, 35, .28);
+  will-change: transform;
+}
+.cta__link:active {
+  box-shadow:
+      0 calc(2 * var(--u)) calc(6 * var(--u)) rgba(4, 150, 70, .30),
+      inset 0 calc(-1 * var(--u)) 0 rgba(0, 0, 0, .12);
+}
+.cta__link:focus-visible {
+  outline: calc(3 * var(--u)) solid #fcc259;
+  outline-offset: calc(3 * var(--u));
+}
+/* 注記は控えめに、ボタンから少し離して独立して読めるように */
+.cta__note { margin-top: calc(14 * var(--u)) !important; }
+.cta__note p {
+  font-size: calc(12.5 * var(--u));
+  line-height: 1.75;
+  opacity: .88;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta__link { animation: none !important; }
+}
+
+/* ===== CTA 補助 ================================================= */
+.cta__link-sub {
+  display: block; width: calc(335 * var(--u));
+  margin: calc(8 * var(--u)) auto 0;
+  font-size: calc(12 * var(--u)); font-weight: 500; line-height: 1.6;
+  text-align: center; color: var(--black);
+}
+.cta__link { text-decoration: none; }
+.cta__link-text { width: 100%; }
