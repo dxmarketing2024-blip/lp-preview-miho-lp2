@@ -13,15 +13,12 @@
     <meta name="description" content="子育てしながら、自分のペースで続けられる仕事を持ちたいママへ。場所や時間、働き方の選択肢を増やすためのインスタ×在宅アフィリエイト。未経験のママが最初の1か月で何をどの順番でやればいいのかをまとめた電子書籍を、LINE登録された方に無料でお渡ししています。">
 
     <!-- fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/reset.min.css">
-    <link rel="stylesheet" href="lib/fadeNew.min.css">
-    <link rel="stylesheet" href="lib/swiper-bundle.min.css">
-    <link rel="stylesheet" href="css/style.min.css">
-    <link rel="stylesheet" href="css/custom.css">
+    <!-- LCP対策：ファーストビュー画像を最優先で取りに行く -->
+    <link rel="preload" as="font" type="font/woff2" href="fonts/NotoSansJP-subset.woff2" crossorigin>
+    <link rel="preload" as="image" href="images/fv_main.webp" fetchpriority="high">
+
+    <link rel="stylesheet" href="css/app.css">
 
     <!-- noscript style -->
     <noscript>
@@ -97,7 +94,7 @@
                         なんでもやってごらんと<br>
                         言ってあげたい
                     </p>
-                    <img class="intro__closing_photo" src="images/intro_mother_child.webp" alt="">
+                    <img class="intro__closing_photo" src="images/intro_mother_child.webp" alt="" loading="lazy" decoding="async" width="560" height="627">
                 </div>
             </section>
 
@@ -109,7 +106,7 @@
                     あります。
                 </h2>
                 <figure class="concept__image fadeup delay">
-                    <img src="images/concept_image.webp" alt="Instagram×在宅アフィリエイトという選択肢">
+                    <img src="images/concept_image.webp" alt="Instagram×在宅アフィリエイトという選択肢" loading="lazy" decoding="async" width="1005" height="600">
                 </figure>
                 <div class="concept__text fadeup delay">
                     <p>センスなんか要りません。<span class="accent">正しく伸びる順番と型を知っていれば成果を出すことが可能です。</span></p>
@@ -137,7 +134,7 @@
                 </h2>
                 <div class="story__container fadeup delay">
                     <figure class="story__image">
-                        <img src="images/story_image.webp" alt="投稿ゼロだった私も、子育ての合間にここから始めました。">
+                        <img src="images/story_image.webp" alt="投稿ゼロだった私も、子育ての合間にここから始めました。" loading="lazy" decoding="async" width="1005" height="900">
                     </figure>
 
                     <div class="ba fadeup delay">
@@ -169,7 +166,7 @@
                         <p>そう考えて最初に始めたのがポイ活でした。</p>
                         <p>けれど、スキマ時間を全部使っても、月に1000円前後。コンビニのおやつ代くらい。</p>
                         <div class="storycard__inset">
-                            <img src="images/story_inset_photo.webp" alt="">
+                            <img src="images/story_inset_photo.webp" alt="" loading="lazy" decoding="async" width="325" height="416">
                         </div>
                         <p><span class="accent">「このまま頑張り続けても、景色は変わらないのかな」</span>——そう感じはじめていました。</p>
                     </div>
@@ -179,7 +176,7 @@
                         Instagramで発信するという選択肢でした。
                     </h3>
                     <figure class="story__image_2 fadeup delay">
-                        <img src="images/story_image_2.webp" alt="Instagramで発信するという選択肢">
+                        <img src="images/story_image_2.webp" alt="Instagramで発信するという選択肢" loading="lazy" decoding="async" width="900" height="600">
                     </figure>
                     <div class="story__text_3 fadeup delay">
                         <p>
@@ -199,7 +196,7 @@
                         <p>それを自分の生活の中で実感できたことが、いちばんの驚きでした。</p>
                     </div>
                     <figure class="story__image_3 fadeup delay">
-                        <img src="images/story_image_3.webp" alt="Instagramで叶えた私らしい働き方">
+                        <img src="images/story_image_3.webp" alt="Instagramで叶えた私らしい働き方" loading="lazy" decoding="async" width="1005" height="1005">
                     </figure>
                 </div>
 
@@ -237,7 +234,7 @@
                                 <h3 class="reason__title">家から一歩も出ずに取り組める</h3>
                             </div>
                             <figure class="reason__photo">
-                                <img src="images/belief_photo_1.webp" alt="家から一歩も出ずに取り組める">
+                                <img src="images/belief_photo_1.webp" alt="家から一歩も出ずに取り組める" loading="lazy" decoding="async" width="945" height="485">
                             </figure>
                             <p class="reason__body">子どもの発熱で予定が飛んでも、謝る相手がいません。それだけで、毎日の余裕が変わります。</p>
                         </div>
@@ -249,7 +246,7 @@
                                 <h3 class="reason__title">顔出しや本名を前提にしない</h3>
                             </div>
                             <figure class="reason__photo">
-                                <img src="images/belief_photo_2.webp" alt="顔出しや本名を前提にしない">
+                                <img src="images/belief_photo_2.webp" alt="顔出しや本名を前提にしない" loading="lazy" decoding="async" width="945" height="485">
                             </figure>
                             <p class="reason__body">知り合いに知られてしまう心配をせずに始められます。見せ方は自分で選べます。</p>
                         </div>
@@ -261,7 +258,7 @@
                                 <h3 class="reason__title">作業はスキマ時間で完結する</h3>
                             </div>
                             <figure class="reason__photo">
-                                <img src="images/belief_photo_3.webp" alt="作業はスキマ時間で完結する">
+                                <img src="images/belief_photo_3.webp" alt="作業はスキマ時間で完結する" loading="lazy" decoding="async" width="945" height="485">
                             </figure>
                             <p class="reason__body">昼寝中の20分、寝かしつけ後の30分。まとまった時間がなくても前に進む形があります。</p>
                         </div>
@@ -273,7 +270,7 @@
                                 <h3 class="reason__title">「センス」ではなく「やり方」</h3>
                             </div>
                             <figure class="reason__photo">
-                                <img src="images/belief_photo_4.webp" alt="「センス」ではなく「やり方」">
+                                <img src="images/belief_photo_4.webp" alt="「センス」ではなく「やり方」" loading="lazy" decoding="async" width="945" height="485">
                             </figure>
                             <p class="reason__body">才能の話ではありません。やり方を覚えれば、来年も再来年も使えるスキルとして残ります。</p>
                         </div>
@@ -289,7 +286,7 @@
                 </h2>
                 <p class="book__text fadeup delay">今回、LINE登録の方へ、<br>電子書籍を1冊お渡ししています。</p>
                 <figure class="book__image fadeup delay">
-                    <img src="images/book_image_new.webp" alt="電子書籍『Instagramで叶えた 私らしい働き方』">
+                    <img src="images/book_image_new.webp" alt="電子書籍『Instagramで叶えた 私らしい働き方』" loading="lazy" decoding="async" width="928" height="1024">
                 </figure>
                 <p class="book__text_2 fadeup delay">ノウハウを並べた教科書ではありません。</p>
                 <div class="book__text_3 fadeup delay">
@@ -443,7 +440,7 @@
                             <li class="swiper-slide">
                                 <div class="voicecard">
                                     <figure class="voicecard__photo">
-                                        <img src="images/voice_photo_1.webp" alt="和田さん 34歳・1児の母">
+                                        <img src="images/voice_photo_1.webp" alt="和田さん 34歳・1児の母" loading="lazy" decoding="async" width="885" height="614">
                                     </figure>
                                     <p class="voicecard__name">和田さん 34歳・1児の母</p>
                                     <p class="voicecard__body">「育休中に何か始めたいと思いつつ、ずっと動けずにいました。何を見ても自分には遠い話に感じていて。みほさんの発信は、生活の中でどう進めるかが具体的で、初めて現実味を持てました。最初の投稿を出すまでに3週間かかりましたが、今では週に2〜3本、自分のペースで投稿できています。寝かしつけ後の30分が、自分に戻る時間に変わってきました。」</p>
@@ -452,7 +449,7 @@
                             <li class="swiper-slide">
                                 <div class="voicecard">
                                     <figure class="voicecard__photo">
-                                        <img src="images/voice_photo_2.webp" alt="石本さん 45歳・パート勤務">
+                                        <img src="images/voice_photo_2.webp" alt="石本さん 45歳・パート勤務" loading="lazy" decoding="async" width="885" height="614">
                                     </figure>
                                     <p class="voicecard__name">石本さん 45歳・パート勤務</p>
                                     <p class="voicecard__body">「朝から夕方まで働いて、帰宅後は家のことで精一杯。新しいことを始める余裕なんてないと思っていました。でも、全部を一気に変えなくていいと分かって、気持ちが軽くなりました。まずはアカウントを作る、次に1本投稿してみる。そんな小さな一歩ずつで、数か月後にはフォローしてくれる方も少しずつ増えてきました。」</p>
@@ -461,7 +458,7 @@
                             <li class="swiper-slide">
                                 <div class="voicecard">
                                     <figure class="voicecard__photo">
-                                        <img src="images/voice_photo_3.webp" alt="寺本さん 29歳・産後9ヶ月">
+                                        <img src="images/voice_photo_3.webp" alt="寺本さん 29歳・産後9ヶ月" loading="lazy" decoding="async" width="885" height="614">
                                     </figure>
                                     <p class="voicecard__name">寺本さん 29歳・産後9ヶ月</p>
                                     <p class="voicecard__body">「産後は自分のことが全部後回しで、社会から離れてしまった気がしていました。顔出しをしなくていいと知って、やっと一歩が踏み出せました。子どもが寝ている間に少しずつ言葉にしていく時間が、今はいちばんの気分転換になっています。」</p>
@@ -484,7 +481,7 @@
             <!-- ============ 11. ベネフィット（未来） ============ -->
             <section class="future fade delay">
                 <div class="futurex fadeup delay">
-                    <img src="images/future_photo.webp" alt="インスタ×アフィリエイトを始めた先の未来">
+                    <img src="images/future_photo.webp" alt="インスタ×アフィリエイトを始めた先の未来" loading="lazy" decoding="async" width="1125" height="661">
                     <p class="futurex__cap">
                         インスタ×アフィリエイトを<br>
                         始めた先の未来、<br>
@@ -674,7 +671,7 @@
             <section class="profile fade delay">
                 <h2 class="profile__heading fadeup delay"><span class="en">Profile</span>プロフィール</h2>
                 <figure class="profile__image fadeup delay">
-                    <img src="images/profile_image.webp" alt="みほ">
+                    <img src="images/profile_image.webp" alt="みほ" loading="lazy" decoding="async" width="489" height="614">
                     <figcaption>みほ</figcaption>
                 </figure>
                 <div class="profile__text fadeup delay">
